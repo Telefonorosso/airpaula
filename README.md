@@ -16,10 +16,10 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
 
 ## Installation and first pairing
 
-1. Back up the current Emu68 boot image and the Raspberry Pi boot partition's `config.txt`. Install the provided Emu68 kernel in place of the existing one. Copy `BTDiag` to `C:`.
-2. For initial discovery, use these lines in the boot partition's `config.txt` (retaining any other required settings):
+1. Back up the current Emu68 kernel image and `config.txt`. Install the provided kernel in place of the existing one. Copy `BTDiag` to `C:`.
+2. For initial discovery, use these directives in `config.txt` (retaining any other required settings):
 
-   ```ini
+   ```test
    dtoverlay=emu68
    dtparam=args=paula_bt
    ```
@@ -32,13 +32,13 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
 
 4. Copy the device's Bluetooth Classic address from the scan and update `config.txt`:
 
-   ```ini
+   ```text
    dtoverlay=emu68
    dtparam=args=paula_bt bt_peer=88:E9:FE:8E:BC:7F
    ```
 
    The address above is an example; use your own device's address.
-   Perform another cold boot with the device in pairing mode. Wait for A2DP audio to start.
+   Perform another reboot with the device in pairing mode. Wait for A2DP audio to start.
 
 6. Once pairing succeeds, run:
 
@@ -58,7 +58,7 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
 
 ## wifipi.device (non) compatibility!
 
-On the tested Raspberry Pi 3A+, bringing WiFiPi online **after** Bluetooth can reset the shared wireless chip and interrupt audio. The workaround is to run `BTDiag --recover` **once, after WiFiPi has initialized**. This restores A2DP without resetting the Raspberry Pi, disconnecting Wi-Fi, or modifying WiFiPi.device.
+On the tested Raspberry Pi 3A+, bringing WIFI online will reset the shared wireless chip and interrupt audio. The workaround is to run `BTDiag --recover` **once, after WIFI has initialized**. This should restore A2DP.
 
 As an alternative workaround, the standalone token `pause` in `cmdline.txt` delays Bluetooth startup by about 60 seconds, allowing going ONLINE before establishing the audio path.
 
@@ -101,9 +101,9 @@ PaulaMixer ONESHOT=YES MASTER=80
 
 AirPaula builds on the work of three projects:
 
-1. **Paula 8364 Emulator** — by **Andreas Wendorf (Akustikrausch)**. The clean-room Paula audio emulator is used with bare-metal adaptations for Emu68. Original project: [amiga-paula-8364-emulator](https://github.com/akustikrausch/amiga-paula-8364-emulator). Licensed under the MIT License; the copyright notice is preserved in `src/raspi/paula/LICENSE`.
+1. **Emu68** — by **Michal Schulz**. The ARM-based Motorola 68k emulation environment and bare-metal foundation on which AirPaula runs. Original project: [michalsc/Emu68](https://github.com/michalsc/Emu68).
 2. **BTstack** — by **BlueKitchen GmbH**. Provides the Bluetooth Classic host stack, A2DP, AVDTP, L2CAP, authentication, and SBC support. Original project: [bluekitchen/btstack](https://github.com/bluekitchen/btstack). BTstack is free for non-commercial use under its own license; commercial use requires a separate arrangement with BlueKitchen.
-3. **Emu68** — by **Michal Schulz**. The ARM-based Motorola 68k emulation environment and bare-metal foundation on which AirPaula runs. Original project: [michalsc/Emu68](https://github.com/michalsc/Emu68).
+3. **Paula 8364 Emulator** — by **Andreas Wendorf (Akustikrausch)**. The clean-room Paula audio emulator is used with bare-metal adaptations for Emu68. Original project: [amiga-paula-8364-emulator](https://github.com/akustikrausch/amiga-paula-8364-emulator). Licensed under the MIT License; the copyright notice is preserved in `src/raspi/paula/LICENSE`.
 
 AirPaula adds the PiStorm-specific Paula capture path, Bluetooth HCI integration, A2DP streaming, diagnostic and recovery tools, and the PaulaMixer AmigaOS Commodity. Thanks to the original authors and contributors of all three projects.
 
