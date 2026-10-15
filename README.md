@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="cover" alt="obviously hand drawen pixel by pixel" width="700">
+  <img src="cover.jpg" alt="obviously hand drawen pixel by pixel" width="700">
 </p>
 
 # airpaula - AI CODED
