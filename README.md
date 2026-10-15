@@ -70,7 +70,7 @@ As an alternative workaround, the standalone token `pause` in `cmdline.txt` dela
 
 Copy the matching `PaulaMixer` executable and `PaulaMixer.info` to the same directory. For automatic startup, place PaulaMixer in `SYS:WBStartup` with its `.info` icon and configure ToolTypes in Workbench **Information**:
 
-```ini
+```text
 DONOTWAIT
 CX_POPUP=NO
 CX_PRIORITY=0
