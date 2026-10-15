@@ -6,13 +6,13 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
 
 ## Requirements
 
-- A **matching prebuilt** POC11-B FIX1 Emu68 kernel and `BTDiag`.
-- The working PaulaMixer Commodity executable and its `.info` icon, if mixer controls are desired.
+- Provided Emu68 1.1 kernel and `BTDiag` application.
+- Provided PaulaMixer commodity if mixer controls are desired.
 - Bluetooth Classic A2DP headphones or speaker.
 
 ## Installation and first pairing
 
-1. Back up the current Emu68 boot image and the Raspberry Pi boot partition's `config.txt`. Install the Emu68 kernel in place of the existing one. Copy `BTDiag` to `C:` (or another directory in your AmigaDOS command path).
+1. Back up the current Emu68 boot image and the Raspberry Pi boot partition's `config.txt`. Install the provided Emu68 kernel in place of the existing one. Copy `BTDiag` to `C:`.
 2. For initial discovery, use these lines in the boot partition's `config.txt` (retaining any other required settings):
 
    ```ini
