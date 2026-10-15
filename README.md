@@ -1,20 +1,18 @@
-# Emu68 Paula Bluetooth
+# Emu68 Paula Bluetooth - AI CODED
 
-Stream real Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiStorm and the Raspberry Pi's onboard Bluetooth controller. The system runs in bare-metal Emu68 without Linux, USB audio hardware, or an AmigaOS Bluetooth service. PaulaMixer provides native AmigaOS mixer controls.
+Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiStorm and the Raspberry Pi's onboard Bluetooth controller. The system runs in bare-metal Emu68. PaulaMixer provides native AmigaOS mixer controls.
 
-**Hardware-tested configuration:** Amiga 600, PiStorm Classic, Raspberry Pi 3A+, AmigaOS 3.1, and MiamiDX/WiFiPi.device. Other combinations have not been validated.
+**Hardware-tested configuration:** Amiga 600, PiStorm Classic, Raspberry Pi 3A+, AmigaOS 3.1. Other combinations have not been validated.
 
 ## Requirements
 
-- A **matching prebuilt** POC11-B FIX1 Emu68 kernel and `BTDiag` (diagnostic ABI 13).
+- A **matching prebuilt** POC11-B FIX1 Emu68 kernel and `BTDiag`.
 - The working PaulaMixer Commodity executable and its `.info` icon, if mixer controls are desired.
-- Bluetooth Classic A2DP headphones or speaker. MiamiDX and WiFiPi.device are optional for Wi-Fi networking.
-
-**Note:** The source milestone ZIP does **not** contain the tested prebuilt kernel or AmigaOS executables. Obtain the matching binaries separately; this document does not cover compilation.
+- Bluetooth Classic A2DP headphones or speaker.
 
 ## Installation and first pairing
 
-1. Back up the current Emu68 boot image and the Raspberry Pi boot partition's `config.txt`. Install the POC11-B FIX1 Emu68 boot image in place of the existing one. Copy `BTDiag` to `C:` (or another directory in your AmigaDOS command path).
+1. Back up the current Emu68 boot image and the Raspberry Pi boot partition's `config.txt`. Install the Emu68 kernel in place of the existing one. Copy `BTDiag` to `C:` (or another directory in your AmigaDOS command path).
 2. For initial discovery, use these lines in the boot partition's `config.txt` (retaining any other required settings):
 
    ```ini
@@ -22,7 +20,7 @@ Stream real Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiStorm 
    dtparam=args=paula_bt
    ```
 
-3. Perform a **cold boot**. Put the audio device in discoverable/pairing mode, then run:
+3. Reboot and put the audio device in discoverable/pairing mode, then run:
 
    ```text
    BTDiag --scan
@@ -54,18 +52,9 @@ Stream real Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiStorm 
 
 ## Wi-Fi with MiamiDX
 
-On the tested Raspberry Pi 3A+, bringing WiFiPi online **after** Bluetooth can reset the shared wireless chip and interrupt audio. The hardware-validated workaround is to run `BTDiag --recover` **once, after WiFiPi has initialized**. This restores A2DP without resetting the Raspberry Pi, disconnecting Wi-Fi, or modifying WiFiPi.device.
+On the tested Raspberry Pi 3A+, bringing WiFiPi online **after** Bluetooth can reset the shared wireless chip and interrupt audio. The workaround is to run `BTDiag --recover` **once, after WiFiPi has initialized**. This restores A2DP without resetting the Raspberry Pi, disconnecting Wi-Fi, or modifying WiFiPi.device.
 
-1. Create `S:PaulaBT-Recover` containing:
-
-   ```amigados
-   C:BTDiag --recover >NIL:
-   ```
-
-2. In **MiamiDX → Events**, configure the appropriate **Start/online** event to execute `S:PaulaBT-Recover` once after the Wi-Fi interface has come online. Use the exact event timing that works in your MiamiDX setup.
-3. For initial testing, remove `>NIL:` to see the recovery result. `HCI WORKING` means rebootstrap succeeded; A2DP reconnection follows asynchronously. Confirm with normal `BTDiag` and audible playback.
-
-As an alternative **Wi-Fi-first** workaround, the standalone token `pause` in `cmdline.txt` delays Bluetooth startup by about 60 seconds, allowing WiFiPi to initialize first. Normally **do not use `pause` together with the MiamiDX recovery event**.
+As an alternative **Wi-Fi-first** workaround, the standalone token `pause` in `cmdline.txt` delays Bluetooth startup by about 60 seconds, allowing WiFiPi to initialize first.
 
 ## PaulaMixer Commodity
 
@@ -75,9 +64,9 @@ Copy the matching `PaulaMixer` executable and `PaulaMixer.info` to the same dire
 DONOTWAIT
 CX_POPUP=NO
 CX_PRIORITY=0
-CX_POPKEY=rawkey control alt m
-MASTER=80
-STEREO=100
+CX_POPKEY=rawkey control alt p
+MASTER=50
+STEREO=10
 INTERPOLATION=LINEAR
 MUTE0=NO
 MUTE1=NO
@@ -97,6 +86,3 @@ PaulaMixer ONESHOT=YES MASTER=80
 
 - **PAL is the default.** Do not append `bt_paula_clock=pal` to the already long `dtparam=args` line.
 - For NTSC, add `bt_paula_clock=ntsc` to the existing single line in `cmdline.txt`.
-- Raspberry Pi `config.txt` lines are limited to **98 characters** in this setup. Keep `dtparam=args=...` on one line; do **not** add a second `dtparam=args` entry as a workaround.
-- After changing boot files, `config.txt`, or `cmdline.txt`, use a **cold boot** so the Raspberry Pi firmware reads the new configuration.
-
