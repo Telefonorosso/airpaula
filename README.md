@@ -96,3 +96,14 @@ PaulaMixer ONESHOT=YES MASTER=80
 
 - **PAL is the default.** Do not append `bt_paula_clock=pal` to the already long `dtparam=args` line.
 - For NTSC, add `bt_paula_clock=ntsc` to the existing single line in `cmdline.txt`.
+
+## Credits
+
+AirPaula builds on the work of three projects:
+
+1. **Paula 8364 Emulator** — by **Andreas Wendorf (Akustikrausch)**. The clean-room Paula audio emulator is used with bare-metal adaptations for Emu68. Original project: [amiga-paula-8364-emulator](https://github.com/akustikrausch/amiga-paula-8364-emulator). Licensed under the MIT License; the copyright notice is preserved in `src/raspi/paula/LICENSE`.
+2. **BTstack** — by **BlueKitchen GmbH**. Provides the Bluetooth Classic host stack, A2DP, AVDTP, L2CAP, authentication, and SBC support. Original project: [bluekitchen/btstack](https://github.com/bluekitchen/btstack). BTstack is free for non-commercial use under its own license; commercial use requires a separate arrangement with BlueKitchen.
+3. **Emu68** — by **Michal Schulz**. The ARM-based Motorola 68k emulation environment and bare-metal foundation on which AirPaula runs. Original project: [michalsc/Emu68](https://github.com/michalsc/Emu68).
+
+AirPaula adds the PiStorm-specific Paula capture path, Bluetooth HCI integration, A2DP streaming, diagnostic and recovery tools, and the PaulaMixer AmigaOS Commodity. Thanks to the original authors and contributors of all three projects.
+
