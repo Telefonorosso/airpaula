@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="cover" alt="obviously hand drawen pixel by pixel" width="700">
+</p>
+
 # airpaula - AI CODED
 
 Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiStorm and the Raspberry Pi's onboard Bluetooth controller. The system runs in bare-metal Emu68. PaulaMixer provides native AmigaOS mixer controls.
