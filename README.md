@@ -56,11 +56,11 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
 - Run `BTDiag` to inspect Bluetooth state. For working playback, look for `Reconnect: streaming`, `stream_open=1` and `started=1`.
 - `BTDiag --scan` discovers devices; `BTDiag --key` displays the saved bonding configuration; `BTDiag --recover` performs a **Bluetooth-only rebootstrap** after the WiFiPi initialization race. Do not invoke `--recover` repeatedly while Bluetooth is healthy.
 
-## Wi-Fi with MiamiDX
+## wifipi.device (non) compatibility!
 
 On the tested Raspberry Pi 3A+, bringing WiFiPi online **after** Bluetooth can reset the shared wireless chip and interrupt audio. The workaround is to run `BTDiag --recover` **once, after WiFiPi has initialized**. This restores A2DP without resetting the Raspberry Pi, disconnecting Wi-Fi, or modifying WiFiPi.device.
 
-As an alternative workaround, the standalone token `pause` in `cmdline.txt` delays Bluetooth startup by about 60 seconds, allowing WiFiPi to initialize first.
+As an alternative workaround, the standalone token `pause` in `cmdline.txt` delays Bluetooth startup by about 60 seconds, allowing going ONLINE before establishing the audio path.
 
 ## PaulaMixer Commodity
 
