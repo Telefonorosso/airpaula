@@ -33,8 +33,10 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
    dtparam=args=paula_bt bt_peer=88:E9:FE:8E:BC:7F
    ```
 
-   The address above is an example; use your own device's address. Perform another cold boot with the device in pairing mode. Wait for A2DP audio to start.
-5. Once pairing succeeds, run:
+   The address above is an example; use your own device's address.
+   Perform another cold boot with the device in pairing mode. Wait for A2DP audio to start.
+
+6. Once pairing succeeds, run:
 
    ```text
    BTDiag --key
