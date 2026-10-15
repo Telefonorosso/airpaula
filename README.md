@@ -65,7 +65,7 @@ As an alternative workaround, the standalone token `pause` in `cmdline.txt` dela
 ## PaulaMixer Commodity
 
 <p align="center">
-  <img src="paulamixer.png" alt="this is really ugly" width="700">
+  <img src="paulamixer.png" alt="this is really ugly" width="500">
 </p>
 
 Copy the matching `PaulaMixer` executable and `PaulaMixer.info` to the same directory. For automatic startup, place PaulaMixer in `SYS:WBStartup` with its `.info` icon and configure ToolTypes in Workbench **Information**:
