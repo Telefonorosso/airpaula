@@ -46,8 +46,8 @@ Stream emulated Amiga Paula audio over Bluetooth Classic A2DP (SBC) using a PiSt
    BTDiag --key
    ```
 
-   Copy the **complete `dtparam=args=...` line** printed by BTDiag into `config.txt`, replacing the previous `dtparam=args` line. It includes `bt_bond=TYPE:LINK_KEY` and preserves the pairing across reboots. The kernel obtains its own Bluetooth address from the Raspberry Pi Device Tree automatically; `bt_bdaddr=` is normally unnecessary.
-
+   Copy the **complete `dtparam=args=...` line** printed by BTDiag into `config.txt`, replacing the previous `dtparam=args` line. It includes `bt_bond=TYPE:LINK_KEY` and preserves the pairing across reboots.
+   
    **Keep the Link Key private**: it is a Bluetooth bonding credential. Do not publish it in logs, screenshots, or example configurations.
 
 ## Everyday use
